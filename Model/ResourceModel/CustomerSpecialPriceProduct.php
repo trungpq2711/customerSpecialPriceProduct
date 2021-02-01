@@ -99,4 +99,27 @@ class CustomerSpecialPriceProduct extends AbstractDb
 
         return $this->getConnection()->fetchAll($select);
     }
+
+    /**
+     * @param int $customerId
+     * @param int $productId
+     * @return string
+     * @throws \Magento\Framework\Exception\LocalizedException
+     */
+    public function getPriceProduct(int $customerId, int $productId)
+    {
+        $currentTimeStamp = $this->dateTime->timestamp();
+        $now = date('Y-m-d H:i:s', $currentTimeStamp);
+        $connection = $this->getConnection();
+        $select = $connection->select()
+            ->from($this->getMainTable(), ['price'])
+            ->where('is_active = ?', 1)
+            ->where('product_id = (?)', $productId)
+            ->where('customer_id = ?', $customerId)
+            ->where('from_date <= ? OR from_date IS NULL', $now)
+            ->where('to_date >= ? OR to_date IS NULL', $now)
+            ->order('priority');
+
+        return $this->getConnection()->fetchOne($select);
+    }
 }

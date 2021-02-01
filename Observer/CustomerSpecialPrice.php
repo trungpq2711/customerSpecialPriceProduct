@@ -45,11 +45,10 @@ class CustomerSpecialPrice implements ObserverInterface
         $item = $observer->getEvent()->getData('quote_item');
         $customerId = $item->getQuote()->getCustomerId();
         if ($customerId) {
-            $productId[] = $item->getProductId();
             try {
-                $price = $this->customerSpecialPriceProductFactory->create()->getPriceProducts(
+                $price = $this->customerSpecialPriceProductFactory->create()->getPriceProduct(
                     $customerId,
-                    $productId
+                    $item->getProductId()
                 );
                 if ($price) {
                     $item->setCustomPrice($price);
