@@ -1,0 +1,70 @@
+{
+    "customer_special_price": {
+        "column": {
+            "entity_id": true,
+            "is_active": true,
+            "customer_id": true,
+            "from_date": true,
+            "to_date": true,
+            "priority": true
+        },
+        "constraint": {
+            "CUSTOMER_SPECIAL_PRICE_CUSTOMER_ID_PRIORITY": true,
+            "PRIMARY": true,
+            "CUSTOMER_SPECIAL_PRICE_CUSTOMER_ID_FROM_DATE_TO_DATE_PRIORITY": true
+        }
+    },
+    "customer_special_price_product": {
+        "column": {
+            "entity_id": true,
+            "customer_special_price_id": true,
+            "product_id": true,
+            "price": true,
+            "customer_id": true,
+            "from_date": true,
+            "to_date": true,
+            "is_active": true,
+            "priority": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "CSTR_SPECIAL_PRICE_PRD_CSTR_SPECIAL_PRICE_ID_PRD_ID": true,
+            "FK_8D682C518788CB68011F180D798530CD": true,
+            "CSTR_SPECIAL_PRICE_PRD_PRD_ID_CAT_PRD_ENTT_ENTT_ID": true
+        }
+    },
+    "customer_special_price_product_view": {
+        "column": {
+            "entity_id": true,
+            "customer_special_price_id": true,
+            "customer_id": true,
+            "product_id": true,
+            "price": true,
+            "from_date": true,
+            "to_date": true,
+            "is_active": true,
+            "priority": true
+        },
+        "constraint": {
+            "UNQ_76A372FB2BA5063673CFC763FEC90FD6": true,
+            "PRIMARY": true
+        }
+    },
+    "relationship_customer_product": {
+        "column": {
+            "entity_id": true,
+            "customer_special_price_id": true,
+            "customer_id": true,
+            "product_id": true,
+            "price": true,
+            "from_date": true,
+            "to_date": true,
+            "is_active": true,
+            "priority": true
+        },
+        "constraint": {
+            "UNQ_F9389CDF89B58C67D3CFADA44F56C6AB": true,
+            "PRIMARY": true
+        }
+    }
+}

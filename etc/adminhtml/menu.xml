@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Magento_Customer::customer_special" title="Customer Special Price" translate="title" sortOrder="100"
+             module="Extensions_CustomerSpecialPrice" parent="Magento_Customer::customer"
+             action="customer_special_price/customer_special/"
+             resource="Extensions_CustomerSpecialPrice::customer_special"/>
+    </menu>
+</config>

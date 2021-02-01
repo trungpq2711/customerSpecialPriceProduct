@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="customer_special_price" resource="default" engine="innodb" comment="Customer Special Price">
+        <column xsi:type="int" name="entity_id" padding="12" unsigned="true" nullable="false" identity="true"
+                comment="Entity ID"/>
+        <column xsi:type="smallint" name="is_active" padding="2" unsigned="false" nullable="false" identity="false"
+                default="0" comment="Is Active"/>
+        <column xsi:type="int" name="customer_id" padding="12" unsigned="true" nullable="false" identity="false"
+                default="0" comment="Customer ID"/>
+        <column xsi:type="datetime" name="from_date" comment="From"/>
+        <column xsi:type="datetime" name="to_date" comment="To"/>
+        <column xsi:type="int" name="priority" padding="12" unsigned="true" nullable="false" identity="false"
+                default="0" comment="Priority"/>
+        <constraint xsi:type="unique" referenceId="UNIQUE_CUSTOMER_ID_FROM_DATE_TO_DATE_PRIORITY">
+            <column name="customer_id"/>
+            <column name="from_date"/>
+            <column name="to_date"/>
+            <column name="priority"/>
+        </constraint>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="entity_id"/>
+        </constraint>
+    </table>
+    <table name="customer_special_price_product" resource="default" engine="innodb" comment="Customer Special Price Product">
+        <column xsi:type="int" name="entity_id" padding="12" unsigned="true" nullable="false" identity="true"
+                comment="Entity ID"/>
+        <column xsi:type="int" name="customer_special_price_id" padding="12" unsigned="true" nullable="false"
+                identity="false"
+                default="0"
+                comment="Customer Special Price ID"/>
+        <column xsi:type="int" name="customer_id" padding="12" unsigned="true" nullable="false" identity="false"
+                default="0" comment="Customer ID"/>
+        <column xsi:type="int" name="product_id" padding="12" unsigned="true" nullable="false" identity="false"
+                default="0" comment="Product ID"/>
+        <column xsi:type="decimal" name="price" scale="4" precision="12" unsigned="false" nullable="false"
+                default="0" comment="Price"/>
+        <column xsi:type="datetime" name="from_date" comment="From"/>
+        <column xsi:type="datetime" name="to_date" comment="To"/>
+        <column xsi:type="smallint" name="is_active" padding="2" unsigned="false" nullable="false" identity="false"
+                default="0" comment="Is Active"/>
+        <column xsi:type="int" name="priority" padding="12" unsigned="true" nullable="false" identity="false"
+                default="0" comment="Priority"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="entity_id"/>
+        </constraint>
+        <constraint xsi:type="unique" referenceId="UNIQUE_CUSTOMER_SPECIAL_PRICE_ID_PRODUCT_ID">
+            <column name="customer_special_price_id"/>
+            <column name="product_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="CUSTOMER_SPECIAL_PRICE_PRODUCT_CUSTOMER_SPECIAL_PRICE"
+                    table="customer_special_price_product"
+                    column="customer_special_price_id"
+                    referenceTable="customer_special_price" referenceColumn="entity_id" onDelete="CASCADE"/>
+        <constraint xsi:type="foreign" referenceId="CUSTOMER_SPECIAL_PRICE_PRODUCT_SPECIAL_PRODUCT_ENTITY"
+                    table="customer_special_price_product"
+                    column="product_id"
+                    referenceTable="catalog_product_entity" referenceColumn="entity_id" onDelete="CASCADE"/>
+    </table>
+</schema>

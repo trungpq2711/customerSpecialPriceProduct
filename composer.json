@@ -1,0 +1,21 @@
+{
+    "name": "extensions/customer-special-price",
+    "version": "1.0.0",
+    "description": "Custom special price for customer",
+    "type": "magento2-module",
+    "require": {
+        "magento/framework": "*",
+        "magento/module-catalog": "104.0.*"
+    },
+    "license": [
+        "Proprietary"
+    ],
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Extensions\\CustomerSpecialPrice\\": ""
+        }
+    }
+}

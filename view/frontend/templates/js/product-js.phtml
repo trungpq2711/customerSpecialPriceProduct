@@ -1,0 +1,18 @@
+<?php /** @var \Magento\Framework\View\Element\Template $block */ ?>
+<?php
+$helper = $this->helper("Extensions\CustomerSpecialPrice\Helper\Data");
+?>
+<?php if ($helper->isEnabled()) : ?>
+<script type="text/x-magento-init">
+    {
+        ".customer-special-price-product": {
+            "customerSpecialPriceProduct": {
+                "url": "<?= $block->getUrl('customer_special_price/customer/price')?>",
+                "element" : ".customer-special-price-product",
+                "label": "<?= $helper->getLabel() ?>",
+                "formatPrice" : <?= $helper->getFormatPrice()?>
+            }
+        }
+    }
+</script>
+<?php endif;?>
